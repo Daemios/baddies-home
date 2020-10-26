@@ -1,0 +1,322 @@
+<div id="application" class="baddies" v-cloak>
+
+    <baddies-header active="apply"></baddies-header>
+
+    <!--
+    <div>
+      <h2>Warning</h2>
+      Our server is undergoing maintaince for the next few hours. Service may be intermittent. If you are unable to apply, please try again later. All your responses will be saved in your local memory.
+    </div>
+    -->
+
+    <div id="step-counter">
+        <h1 class="g-single">Baddies Application</h1>
+        <h2>Step {{state+1}} of 5</h2>
+    </div>
+
+    <div id="join-discord" v-if="state == 0">
+        <h3>Discord</h3>
+        <p>
+            Before we go any further, our application process ties directly into
+            Discord. Discord is also what we use for voice chat during raids, so
+            it is required before we start. You can find Discord here at the link
+            below. Download it if you don't have Discord already, and join our server.
+        </p>
+        <div class="discord-links">
+            <a href="https://discordapp.com/" target="_blank">
+                <img src="/dynamicsuite/packages/baddies-home/imgs/Discord-Logo.svg" alt="Download Discord" class="discord-big">
+            </a>
+            <a href="https://discordapp.com/invite/rP4Pt2A" class="text-baddies" id="baddies-discord-link">
+                Baddies
+            </a>
+        </div>
+        <p>
+            Once you've joined, continue below.
+        </p>
+        <footer>
+            <aui-button @click="stepToForm()">
+                I have joined the guild Discord
+            </aui-button>
+        </footer>
+    </div>
+
+    <div id="app-questions" class="questions" v-if="state == 1">
+
+        <h3 class="g-single">About You</h3>
+        <aui-input
+            class="g-1"
+            label="Name"
+            :failure="form.player_name.error"
+            v-model="form.player_name.value"
+            @input="saveQuestion('player_name')"
+        ></aui-input>
+
+        <aui-input
+            class="g-2"
+            label="Age"
+            :failure="form.player_age.error"
+            v-model="form.player_age.value"
+            @input="saveQuestion('player_age')"
+        ></aui-input>
+
+        <aui-select
+            class="g-3"
+            label="Gender"
+            :failure="form.player_gender.error"
+            :options="options.gender"
+            v-model="form.player_gender.value"
+            @input="saveQuestion('player_gender')"
+        ></aui-select>
+
+        <aui-input
+            class="g-left"
+            label="Battletag"
+            :failure="form.battletag.error"
+            v-model="form.battletag.value"
+            placeholder="Baddies#1234"
+            @input="saveQuestion('battletag')"
+        ></aui-input>
+        <aui-input
+            class="g-right"
+            label="Discord"
+            :failure="form.discord.error"
+            placeholder="Baddies#1234"
+            v-model="form.discord.value"
+            @input="saveQuestion('discord')"
+        ></aui-input>
+
+        <h3 class="g-single">Character Info</h3>
+        <aui-input
+            class="g-left"
+            label="Character"
+            :failure="form.character.error"
+            placeholder="Exact name"
+            v-model="form.character.value"
+            @input="saveQuestion('character')"
+        ></aui-input>
+        <aui-datalist
+            id="server-list"
+            class="g-right"
+            label="Server"
+            :failure="form.server.error"
+            :options="servers"
+            placeholder="Search for server..."
+            v-model="form.server.value"
+            @input="saveQuestion('server'); getWoWServers()"
+        ></aui-datalist>
+        <aui-select
+            class="g-left"
+            label="Class"
+            :failure="form.wow_class.error"
+            :options="options.classes"
+            v-model="form.wow_class.value"
+            @input="saveQuestion('wow_class'); getWoWClassesSpec(true)"
+        ></aui-select>
+        <aui-select
+            class="g-right"
+            label="Specialization"
+            :failure="form.specialization.error"
+            :options="options.specializations"
+            :disabled="(form.wow_class.value === null)"
+            v-model="form.specialization.value"
+            @input="saveQuestion('specialization')"
+        ></aui-select>
+        <aui-input
+            class="g-single"
+            label="Current Progression"
+            :failure="form.current_progression.error"
+            placeholder="e.g. 10/0M Nathria"
+            v-model="form.current_progression.value"
+            @input="saveQuestion('current_progression')"
+        ></aui-input>
+
+        <h3 class="g-single">Your History</h3>
+        <aui-textarea
+            class="g-single"
+            label="How long have you been raiding? What experience do you have with Mythic progression in the past?"
+            :failure="form.raid_history.error"
+            v-model="form.raid_history.value"
+            @input="saveQuestion('raid_history')"
+        ></aui-textarea>
+        <aui-textarea
+            class="g-single"
+            label="List your last two guilds. Why did you leave and how long were you there?"
+            :failure="form.last_two_guilds.error"
+            placeholder="Honesty is important here, if you were removed or had a falling out, tell us"
+            v-model="form.last_two_guilds.value"
+            @input="saveQuestion('last_two_guilds')"
+        ></aui-textarea>
+
+        <h3 class="g-single">Performance</h3>
+        <aui-input
+            class="g-single"
+            label="Link to Screenshot in combat. Please be demonstrating your role i.e. healers be healing in a raid"
+            :failure="form.screenshot.error"
+            placeholder="imgur.com is free"
+            v-model="form.screenshot.value"
+            @input="saveQuestion('screenshot')"
+        ></aui-input>
+        <aui-textarea
+            class="g-single"
+            label="How do you improve yourself? What resources do you use?"
+            :failure="form.improve_resources.error"
+            v-model="form.improve_resources.value"
+            @input="saveQuestion('improve_resources')"
+        ></aui-textarea>
+        <aui-textarea
+            class="g-single"
+            label="Link to a log from a progression kill of yours and tell us what you observe, in detail, good or bad. Some examples may include positioning, defensive use, cooldown management, and throughput, but may extend to anything else you think is relevant."
+            :failure="form.log_analysis.error"
+            v-model="form.log_analysis.value"
+            @input="saveQuestion('log_analysis')"
+        ></aui-textarea>
+
+        <h3 class="g-single">Closing</h3>
+        <aui-textarea
+            class="g-single"
+            label="Do you have any potential issues that could crop up during or shortly after your trial that would prevent you from showing up on time / attending raid?"
+            :failure="form.trial_schedule.error"
+            placeholder="This is only for our own information, it won't disqualify you"
+            v-model="form.trial_schedule.value"
+            @input="saveQuestion('trial_schedule')"
+        ></aui-textarea>
+        <aui-textarea
+            class="g-single"
+            label="Is there anything else you want us to know?"
+            :failure="form.closing_notes.error"
+            v-model="form.closing_notes.value"
+            @input="saveQuestion('closing_notes')"
+        ></aui-textarea>
+
+        <footer class="g-single">
+            <aui-button @click="stepToDiscordWarning()">Continue</aui-button>
+        </footer>
+
+    </div>
+
+    <div id="discord-prep" v-if="state == 2">
+
+        <div>
+
+            <p class="discord-warn">
+                Verify this is your Discord ID! We cant continue without it, and
+                you must be in our Discord by this point. If you still need to join,
+                click the Discord link in the navigation bar above, and an invite
+                will open in a new window.
+            </p>
+
+            <h3 class="discord-id">
+                {{form.discord.value}}
+            </h3>
+
+            <p class="discord-info">
+                We're nearly done! We're just going to collect some info about your
+                character now, and submit the entire thing to your very own Discord
+                channel.
+            </p>
+
+        </div>
+
+        <footer>
+            <aui-button @click="checkExternals()">Send It!</aui-button>
+        </footer>
+
+    </div>
+
+    <div id="various-checks" v-if="state == 3">
+
+        <div class="check-externals" v-if="checks.all === null">
+            <div>
+                <h4>Percentiles</h4>
+                <div class="state-icon">
+                <span class="checking" v-if="checks.percentiles === null">
+                    <div class="lds-ellipsis">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </span>
+                <span class="missing" v-if="checks.percentiles === false">
+                    Disabled
+                </span>
+                <span class="found" v-if="checks.percentiles === true">
+                    Success
+                </span>
+                </div>
+            </div>
+            <div>
+                <h4>Analysis</h4>
+                <div class="state-icon">
+                <span class="checking" v-if="checks.analysis === null">
+                    <div class="lds-ellipsis">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </span>
+                    <span class="missing" v-if="checks.analysis === false">
+                    Disabled
+                </span>
+                    <span class="found" v-if="checks.analysis === true">
+                    Success
+                </span>
+                </div>
+            </div>
+            <div>
+                <h4>Discord</h4>
+                <div class="state-icon">
+                    <span class="checking" v-if="checks.discord === null">
+                        <div class="lds-ellipsis">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </span>
+                    <span class="missing" v-if="checks.discord === false">
+                        Failed
+                    </span>
+                    <span class="found" v-if="checks.discord === true">
+                        Success
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div id="discord-looking-message" v-if="checks.all === null">
+            We'll look for you for the next 10 seconds. It's ok if the non-discord stuff fails.
+        </div>
+
+        <div id="discord-fail" v-if="!checks.all">
+            <div>
+                We were unable to find you in Discord. Please check
+                what you entered and try again. Assure there are no spaces, and
+                the capitalization matches exactly.
+            </div>
+            <div>
+                <aui-button @click="backToQuestions()">Back to Application</aui-button>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="all-done" v-if="state == 4">
+        <h3>Finished!</h3>
+        <p>
+            Your application process will continue from here on out in
+            your Discord channel. We'll probably have a few questions about your
+            play or class knowledge. Check back periodically! Applications usually
+            take 1-3 days to be processed.
+        </p>
+        <p>
+            If you cannot find your channel, or have other questions or concerns
+            about your application, feel free to contact me personally at
+            <b>Daemios#1636</b> on Battle.net or <b>Daemios#1918</b> on Discord, or
+            join us on Discord in the public text channels for help. We'll be happy to
+            help.
+        </p>
+    </div>
+
+</div>

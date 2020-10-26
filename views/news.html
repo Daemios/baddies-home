@@ -1,0 +1,109 @@
+<div id="news">
+
+    <baddies-header active="news"></baddies-header>
+
+    <div class="area-baddies">
+
+        <div class="section">
+
+            <div class="president-seal">
+
+                <h3 class="section-title president-head">From The Office of The Guildmaster</h3>
+                <h1 class="section-title president-name">Bigpapi aka Lil' Poopy</h1>
+                <h2 class="section-title president-sub">President of the United Guilds of Baddies</h2>
+
+                <!-- <svg class="president-seal-arc" width="270" height="190">
+                  M = start point x + y, A = arc 5 arguments and endpoint
+                  <path id="top-curve" d="M20 190 A 25 25 0 0 1 205 190" stroke="transparent" fill="transparent"/>
+                  <text width="350">
+                    <textPath xlink:href="#top-curve">
+                      - From The Office of the GM -
+                    </textPath>
+                  </text>
+                </svg> -->
+
+            </div>
+
+            <div class="audio-control">
+                <audio controls id="news-music">
+                    <source src="../client/audio/xray.mp3" type="audio/mp3">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+
+            <div v-if="!pepe_set">
+                <h2>Ruh-Roh Raggy...</h2>
+                <p class="set-the-mood">
+                    In order to prepare everyone for some bad news, I've taken the liberty of setting some mood music and ambiance
+                    to soften the blow.
+                </p>
+                <p class="set-the-mood">
+                    <button class="btn btn-primary btn-full" @click="setMood()">Please Set the Mood Papi</button>
+                </p>
+            </div>
+
+            <div class="main-pepe" v-if="pepe_set">
+                <img src="../client/imgs/pepehands.png" alt="">
+            </div>
+
+            <div v-if="mood_set">
+                <h2 class="fade-first">Xray is Retiring</h2>
+                <p class="fade-first">
+                    This is a result of his firefighting training. He found out a few days ago that he has 9 months of a schedule
+                    that is basically impossible to maintain our current raid schedule on. We initially thought it'd be done before
+                    Slands and I could shoulder the burden between then and now, but the even worse part of this is that after the 9
+                    months, he will be on a rotation 5-off / 2-on schedule that means that he will realistically be unreliable as a
+                    raider for potentially years.
+                </p>
+
+                <h2 class="fade-last">Raid Leader</h2>
+                <p class="fade-last">
+                    This... leaves us in a slightly awkward position. The news probably couldn't have come at a worse time. We
+                    don't have enough runway now to try and find a suitable replacement from outside the guild, so I've spent the
+                    last few days talking to a select few raiders and coming up with a plan of action.
+                </p>
+                <p class="fade-last">
+                    Dru is going back to tank, and I'm going to find the easiest range that is worth never sitting and raid lead
+                    as DPS. I've done it in the past at ~US70-80, and while it will undoubtedly take some time for me to shake off
+                    the rust of not doing it in a while, this is the best move that I can potentially come up with on short notice.
+                </p>
+                <p class="fade-last">
+                    Simultaneously, I will be promoting Lethim to officer (3rd time is the charm kappa). I will also probably, but
+                    not for sure yet, be promoting another one to help take the stress off doing almost all the jobs in the guild now.
+                    Strategy planning will be done communally now.
+                </p>
+                <p class="fade-last">
+                    Just to be real, there are a lot of maybes with this plan. Maybe I can compete on dps, maybe I can raid lead
+                    effectively. We have a nuclear option ready in case of either of those going awry. If I'm not competitive on
+                    both things, I'm going to 21st man raid lead any boss where that impacts us. My goal is primarily to make sure
+                    this guild does good, everything else comes second. I'll find a few people who can reliably get me a solid,
+                    low latency stream if we need to go this route.
+                </p>
+                <h2 class="fade-last">A Second Path</h2>
+                <p class="fade-last">
+                    There is, however, a second way through this. Xray can potentially be reliable on weekends until the training
+                    9 month portion is over. If we were to move our raid days to Fri, Sat, and Sunday (temporarily), we would buy ourselves 9
+                    months of time to fix this. There are definite issues with this plan, Cortana would almost certainly be unable
+                    to raid, so we'd lose him instead. I imagine there are others with a similar situation, and if that's the case,
+                    then I'm pretty against it, but in the interest of exploring all options, I'd just like to know in the following
+                    poll, who could raid the same times on Fri/Sat/Sun. Please fill this out ASAP.
+                </p>
+                <p>
+                    Whatever is decided, we wont be entirely losing Xray. If we decide to stick with the weekday thing, which
+                    seems the most likely route, we'll all be able to escape from the alcoholic dad into the cool divorced Mom's
+                    life on the weekends, as he will be taking over the Goodies raid and using that as his method of progression.
+                </p>
+                <p class="fade-last">
+                    <a href="https://forms.gle/rqiWhXv2p5XFsYNk8" >
+                        <button class="btn btn-primary">
+                            Vote Here
+                        </button>
+                    </a>
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

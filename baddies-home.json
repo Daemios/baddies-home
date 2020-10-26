@@ -1,0 +1,55 @@
+{
+  "name": "baddies-home",
+  "author": "Michael Ryan",
+  "version": "1.0.0",
+  "description": "Baddies.org homepage",
+  "license": "Proprietary",
+  "views": {
+    "/home": {
+      "navigable": false,
+      "public": true,
+      "hide_nav": true,
+      "entry": "views/home.html",
+      "title": "Home",
+      "js": ["js/home.js"],
+      "css": ["css/home.min.css"]
+    },
+    "/apply": {
+      "navigable": false,
+      "public": true,
+      "hide_nav": true,
+      "entry": "views/apply.html",
+      "title": "Apply",
+      "js": ["js/apply.js"],
+      "css": ["css/apply.min.css"]
+    },
+    "/sales": {
+      "navigable": false,
+      "public": true,
+      "hide_nav": true,
+      "entry": "views/sales.html",
+      "title": "Sales",
+      "js": ["js/sales.js"],
+      "css": ["css/sales.min.css"]
+    }
+  },
+  "apis": {
+    "progression.get": {
+      "entry": "apis/progression.get.api.php",
+      "public": true
+    },
+    "servers.get": {
+      "entry": "apis/servers.get.api.php",
+      "public": true,
+      "post": ["term"]
+    },
+    "pricing_type.read": {
+      "entry": "apis/pricing_type.read.php",
+      "public": true
+    },
+    "pricing.read": {
+      "entry": "apis/pricing.read.php",
+      "public": true
+    }
+  }
+}

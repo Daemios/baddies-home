@@ -1,0 +1,63 @@
+<div id="sales" class="baddies" v-cloak>
+
+    <baddies-header active="sales"></baddies-header>
+
+    <div class="content">
+
+        <div class="about">
+
+            <h1>Buying?</h1>
+
+            <p>
+                Baddies has done <strong>over a billion gold</strong> in sales over the last decade both on Stormreaver
+                and off. We're the dependable choice, and whether you're looking for raid loot, mounts, or
+                to do your weekly content, we have you covered.
+            </p>
+
+            <p>
+                Have questions about how our sales work or want to schedule a run? Contact our GM
+                directly at <strong>Daemios#1636</strong> on Battle.net or <strong>Daemios#1918</strong>
+                on Discord. You can also schedule a run with <strong>any of our advertisers</strong> directly!
+            </p>
+
+            <h2>Contacts:</h2>
+            <div>GM - <strong>Daemios#1636</strong></div>
+            <div>Sales Officer - <strong>Hunter#13662</strong></div>
+            <div>Main Advertiser - <strong>Dairseang#1233</strong></div>
+
+            <a href="https://forms.gle/cg2APXS86zBgg3dH6">
+                <aui-button>Schedule Run</aui-button>
+            </a>
+
+        </div>
+
+        <div class="data">
+            <div id="instance-selector">
+
+                <aui-select
+                        v-model="pricing_type"
+                        :options="pricing_types"
+                ></aui-select>
+
+            </div>
+
+            <div class="prices">
+                <div class="entry" v-for="item in prices">
+                    <span class="boss">{{item.label}}</span>
+                    <span class="price">{{formatPrice(item.price)}}</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!--
+        <button class="btn btn-primary">
+            Schedule Run
+        </button>
+        -->
+
+    </div>
+
+</div>
+
+

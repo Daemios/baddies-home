@@ -1,0 +1,151 @@
+@import "../../../baddies-theme/client/css/baddies-colors"
+
+@keyframes illidan
+  0%
+    opacity: 0
+    right: -60rem
+  100%
+    opacity: 1
+    right: -40rem
+
+@keyframes thrall
+  0%
+    opacity: 0
+    left: -28rem
+  100%
+    opacity: 1
+    left: -8rem
+
+@keyframes chevron
+  0%
+    margin-bottom: 0
+
+  50%
+    margin-bottom: 1rem
+
+  100%
+    margin-bottom: 0
+
+#home
+  min-height: 100%
+  padding-bottom: 3rem
+  overflow: hidden
+
+  #hero
+    height: 100vh
+    width: 100vw
+    display: flex
+    justify-content: center
+    align-items: center
+    border-bottom: 1px solid $border
+    margin-bottom: 3rem
+    position: relative
+    overflow-x: hidden
+
+    h1
+      font-size: 12vw
+      z-index: 999
+      color: $text-baddies
+      text-shadow: 6px 6px 0 #080a0e, -1px -1px 0 #080a0e, 1px -1px 0 #080a0e, -1px 1px 0 #080a0e, 1px 1px 0 #080a0e
+
+    .illidan
+      position: absolute
+      bottom: 0
+      right: -40vw
+      height: calc(100vh - 58px)
+      animation: illidan 5s forwards
+
+    .thrall
+      position: absolute
+      bottom: 0
+      left: -8vw
+      height: calc(90vh - 58px)
+      transform: scaleX(-1)
+      animation: thrall 5s forwards
+
+    .fa-angle-down
+      position: absolute
+      bottom: 0
+      left: 47vw
+      font-size: 4rem
+      animation: chevron 2s ease infinite forwards
+      color: $text-baddies
+
+
+  #about
+    display: grid
+    grid-template-columns: auto minmax(200px, 500px) minmax(200px, 500px) minmax(100px, 400px) auto
+    grid-gap: 2rem
+
+    #about-baddies
+      grid-column: 2 / 4
+      text-align: justify
+
+    .progress
+      grid-column: 4
+      text-align: right
+      border-left: 1px solid $border
+      padding-left: 2rem
+
+      .schedule
+        display: grid
+        grid-template-columns: auto 1fr
+        margin-bottom: 2rem
+
+        *
+          display: flex
+          justify-content: flex-end
+          align-items: center
+          margin: 0
+
+      .current
+        width: fit-content
+        margin: 2rem 0 1rem auto
+
+        .tier-name
+          font-size: 4rem
+          line-height: 4rem
+          letter-spacing: .6rem
+
+        .current-rank
+          display: flex
+          white-space: nowrap
+          margin: 0
+
+          .faux-break
+            width: 100%
+            margin: .6rem 1rem 0 -.5rem
+            border-top: 2px solid $highlight-primary
+
+      .extended
+
+        .ranking
+          display: grid
+          grid-template-columns: 2fr 1fr 1fr
+
+          .title
+            text-align: left
+
+
+    .other-tiers
+      margin-top: 1rem
+
+      a
+        color: $highlight-secondary
+
+
+    #meet-the-team
+      grid-column: 2 / 5
+
+      .officers
+        display: grid
+        grid-template-columns: 1fr 1fr
+        grid-gap: 2rem
+        padding: 1rem 0
+
+        .officer
+          text-align: justify
+
+          h3
+            margin-bottom: .125rem
+
