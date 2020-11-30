@@ -17,7 +17,8 @@ let instance = new Vue({
             specializations: {},
             gender: {
                 'Male': 'Male',
-                'Female': 'Female'
+                'Female': 'Female',
+                'Non-binary': 'Non-binary'
             }
         },
         form: {
@@ -114,10 +115,13 @@ let instance = new Vue({
                 this.form[key].error = false;
             })
 
+            console.log(this.form)
+            console.log(Object.keys(this.form))
+
             // Validate fields aren't null
-            for (const key in Object.keys(this.form)) {
-                if (this.form[key].value === null) {
-                    this.form[key].error = true;
+            for (const [key, value] of Object.entries(this.form)) {
+                if (value.value === null) {
+                    value.error = true;
                     advance = false;
                 }
             }

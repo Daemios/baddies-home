@@ -60,7 +60,7 @@ Vue.component('baddies-progression', {
             <h2 class="boss-kills" v-if="progression">
                 
             </h2>
-            <div class="tier-name text-baddies">{{prettyTierName("nya'lotha-the-waking-city")}}</div>
+            <div class="tier-name text-baddies">{{prettyTierName("ny'alotha-the-waking-city")}}</div>
             <h2 class="current-rank" v-if="progression.progression">
                 <span class="faux-break"></span>
                 US {{region_rank('nyalotha-the-waking-city')}} | {{boss_kills('nyalotha-the-waking-city')}}
