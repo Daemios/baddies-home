@@ -60,22 +60,23 @@ Vue.component('baddies-progression', {
             <h2 class="boss-kills" v-if="progression">
                 
             </h2>
-            <div class="tier-name text-baddies">{{prettyTierName("ny'alotha-the-waking-city")}}</div>
+            <div class="tier-name text-baddies">{{prettyTierName("nathria")}}</div>
             <h2 class="current-rank" v-if="progression.progression">
                 <span class="faux-break"></span>
-                US {{region_rank('nyalotha-the-waking-city')}} | {{boss_kills('nyalotha-the-waking-city')}}
+                US {{region_rank('castle-nathria')}} | {{boss_kills('castle-nathria')}}
             </h2>
         </div>
         
         <div class="extended">
         
-            <div class="ranking">
+            <div class="ranking" v-if="false">
                 <h4 class="title">Raid</h4>
                 <h4 class="rank">Rank</h4>
                 <h4 class="bosses">Kills</h4>
             </div>
             
             <baddies-ranking 
+                v-if="false"
                 v-for="tier in tiers" 
                 :key="tier.key" 
                 :tier="tier" 
@@ -106,6 +107,10 @@ Vue.component('baddies-progression', {
     data() {
         return {
             tiers: [
+                {
+                    name: 'Nya\'lotha',
+                    key: 'nyalotha-the-waking-city'
+                },
                 {
                     name: 'Eternal Palace',
                     key: 'the-eternal-palace'

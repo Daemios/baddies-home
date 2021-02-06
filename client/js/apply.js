@@ -115,9 +115,6 @@ let instance = new Vue({
                 this.form[key].error = false;
             })
 
-            console.log(this.form)
-            console.log(Object.keys(this.form))
-
             // Validate fields aren't null
             for (const [key, value] of Object.entries(this.form)) {
                 if (value.value === null) {
@@ -357,6 +354,7 @@ let instance = new Vue({
         getWoWServers() {
             DynamicSuite.call('baddies-home', 'servers.get', {term: this.form.server.value}, response => {
                 if (response.status === 'OK') {
+                    console.log(response)
                     this.servers = response.data;
                 } else {
                     console.log('Error retrieving servers')
@@ -478,7 +476,7 @@ let instance = new Vue({
                     },
                     {
                         name: 'Specialization',
-                        value: this.form.specialization.value + ' ' +
+                        value: this.options.specializations[this.form.specialization.value] + ' ' +
                             this.options.classes[this.form.wow_class.value]
                     },
                     {
@@ -555,7 +553,17 @@ let instance = new Vue({
                 });
         }
     },
-    computed: {},
+    computed: {
+        server_options() {
+            let servers = [];
+
+            Object.values(this.servers).forEach(server => {
+                servers.push(server);
+            })
+
+            return servers;
+        }
+    },
     watch: {
         checks: {
             handler() {

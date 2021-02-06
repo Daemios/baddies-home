@@ -94,16 +94,16 @@
             v-model="form.character.value"
             @input="saveQuestion('character')"
         ></aui-input>
-        <aui-datalist
+        <aui-input
             id="server-list"
             class="g-right"
             label="Server"
             :failure="form.server.error"
-            :options="servers"
+            :options="server_options"
             placeholder="Search for server..."
             v-model="form.server.value"
             @input="saveQuestion('server'); getWoWServers()"
-        ></aui-datalist>
+        ></aui-input>
         <aui-select
             class="g-left"
             label="Class"
